@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: wiki-http
+  namespace: wiki
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`www3.mibi`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: wiki-service
+          port: 80
+          kind: Service

@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+  namespace: wiki
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db
+        image: postgres:16
+        ports:
+        - containerPort: 5432
+        envFrom:
+        - secretRef:
+            name: db-secret
+        securityContext:
+            allowPrivilegeEscalation: false
+        resources:
+          requests:
+            memory:  "1Gi"
+            cpu: "500m"
+          limits:
+            memory:  "1Gi"
+            cpu: "500m"
+        livenessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - wikidb
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - wikidb
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 5
+        volumeMounts:
+        - name: db-pvc-mount
+          mountPath: /var/lib/postgres/data/pgdata
+          readOnly: false
+      volumes:
+      - name: db-pvc-mount
+        persistentVolumeClaim:
+          claimName: db-pvc
