@@ -50,7 +50,7 @@ spec:
             periodSeconds: 30
             timeoutSeconds: 10
             successThreshold: 1
-            failureThreshold: 3
+            failureThreshold: 300
           livenessProbe:
             httpGet:
               path: /index.php/Hauptseite
@@ -59,7 +59,7 @@ spec:
             periodSeconds: 30
             timeoutSeconds: 10
             successThreshold: 1
-            failureThreshold: 3
+            failureThreshold: 300
           volumeMounts:
             - name: wiki-pvc
               mountPath: /var/www/html/images

@@ -9,7 +9,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pgsql pdo_pgsql
 
-# Download and install DynamicPageList
-RUN wget https://extdist.wmflabs.org/dist/extensions/intersection-REL1_40-57ecfad.tar.gz -O /tmp/intersection.tar.gz \
-    && tar -xzf /tmp/intersection.tar.gz -C /var/www/html/extensions \
-    && rm /tmp/intersection.tar.gz
+# Download and install DynamicPageList3
+RUN wget https://github.com/Universal-Omega/DynamicPageList3/archive/refs/tags/3.5.1.tar.gz -O /tmp/dpl3.tar.gz \
+    && tar -xzf /tmp/dpl3.tar.gz -C /var/www/html/extensions \
+    && rm /tmp/dpl3.tar.gz \
+    && mv /var/www/html/extensions/DynamicPageList3-3.5.1 /var/www/html/extensions/DynamicPageList3
