@@ -32,6 +32,15 @@ kubectl create configmap localsettings-configmap \
     --kubeconfig $KUBECONFIG \
     --from-file=config/LocalSettings.php
 
+# delete and create php.ini configmap
+kubectl delete configmap phpini-configmap \
+    -n $NAMESPACE \
+    --kubeconfig $KUBECONFIG
+kubectl create configmap phpini-configmap \
+    -n $NAMESPACE \
+    --kubeconfig $KUBECONFIG \
+    --from-file=config/php.ini
+
 # registry
 kubectl delete secret regcred -n $NAMESPACE --kubeconfig=$KUBECONFIG
 kubectl create secret docker-registry -n $NAMESPACE \

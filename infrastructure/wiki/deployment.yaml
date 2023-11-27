@@ -27,6 +27,9 @@ spec:
         - name: localsettings-configmap
           configMap:
             name: localsettings-configmap
+        - name: phpini-configmap
+          configMap:
+            name: phpini-configmap
       initContainers:
         # Sets the 777 permissions on the images folder
         - name: images-folder-permissions
@@ -50,7 +53,7 @@ spec:
             periodSeconds: 30
             timeoutSeconds: 10
             successThreshold: 1
-            failureThreshold: 300
+            failureThreshold: 20
           livenessProbe:
             httpGet:
               path: /index.php/Hauptseite
@@ -59,12 +62,15 @@ spec:
             periodSeconds: 30
             timeoutSeconds: 10
             successThreshold: 1
-            failureThreshold: 300
+            failureThreshold: 20
           volumeMounts:
             - name: wiki-pvc
               mountPath: /var/www/html/images
             - name: localsettings-configmap
               mountPath: /var/www/html/LocalSettings.php
               subPath: LocalSettings.php
+            - name: phpini-configmap
+              mountPath: /usr/local/etc/php/php.ini
+              subPath: php.ini
           securityContext:
             allowPrivilegeEscalation: false
