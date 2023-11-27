@@ -45,6 +45,13 @@ spec:
           ports:
             - containerPort: 80
               name: http
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
           readinessProbe:
             httpGet:
               path: /index.php/Hauptseite

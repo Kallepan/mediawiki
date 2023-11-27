@@ -152,6 +152,7 @@ wfLoadExtension( 'TemplateData' );
 wfLoadExtension( 'VisualEditor' );
 wfLoadExtension( 'WikiEditor' );
 wfLoadExtension( 'DynamicPageList3' );
+wfLoadExtension( 'CSS' );
 
 # End of automatically generated settings.
 # Add more configuration options below.
@@ -190,6 +191,15 @@ $wgPasswordPolicy = [
 ### End password policy ###
 
 ### Permissions ###
+$wgGroupPermissions['*']['edit'] = false;
+$wgGroupPermissions['*']['read'] = true;
+$wgGroupPermissions['*']['createpage'] = false;
+$wgGroupPermissions['*']['createtalk'] = false;
+$wgGroupPermissions['*']['upload'] = false;
+$wgGroupPermissions['*']['reupload'] = false;
+$wgGroupPermissions['*']['reupload-shared'] = false;
+$wgGroupPermissions['*']['minoredit'] = false;
+
 $wgGroupPermissions['user']['move'] = false;
 $wgGroupPermissions['user']['read'] = true;
 $wgGroupPermissions['user']['edit'] = false;
@@ -200,6 +210,15 @@ $wgGroupPermissions['user']['upload'] = false;
 $wgGroupPermissions['user']['reupload'] = false;
 $wgGroupPermissions['user']['reupload-shared'] = false;
 $wgGroupPermissions['user']['minoredit'] = false;
+
+$wgGroupPermissions['sysop']['edit'] = true;
+$wgGroupPermissions['sysop']['read'] = true;
+$wgGroupPermissions['sysop']['createpage'] = true;
+$wgGroupPermissions['sysop']['createtalk'] = true;
+$wgGroupPermissions['sysop']['upload'] = true;
+$wgGroupPermissions['sysop']['reupload'] = true;
+$wgGroupPermissions['sysop']['reupload-shared'] = true;
+$wgGroupPermissions['sysop']['minoredit'] = true;
 
 $wgGroupPermissions['editor']['edit'] = true;
 $wgGroupPermissions['editor']['createpage'] = true;
