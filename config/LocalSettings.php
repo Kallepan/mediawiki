@@ -34,7 +34,7 @@ $wgSitename = "Mibiwiki";
 $wgScriptPath = "";
 
 ## The protocol and server name to use in fully-qualified URLs
-$wgServer = "http://www3.mibi";
+$wgServer = "http://www.mibi";
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;

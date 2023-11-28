@@ -7,9 +7,38 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`www.mibi`) && PathPrefix(`/`)
+    - match: Host(`www.mibi`) 
       kind: Rule
       services:
         - name: wiki-service
           port: 80
           kind: Service
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: wiki-https
+  namespace: wiki
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`www.mibi`)
+      middlewares:
+      - name: redirect-to-http
+        namespace: wiki
+      kind: Rule
+      services:
+        - name: wiki-service
+          port: 80
+          kind: Service
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-to-http
+  namespace: wiki
+spec:
+  redirectScheme:
+    scheme: http
+    permanent: true
