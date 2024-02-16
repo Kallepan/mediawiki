@@ -35,7 +35,7 @@ spec:
             command:
             - pg_isready
             - -U
-            - wikidb
+            - wikidbuser
           initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 5
@@ -44,7 +44,7 @@ spec:
             command:
             - pg_isready
             - -U
-            - wikidb
+            - wikidbuser
           initialDelaySeconds: 5
           periodSeconds: 10
           timeoutSeconds: 5
